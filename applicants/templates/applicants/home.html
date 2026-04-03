@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Applicants</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        a.button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: blue;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Applicants List</h1>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Response</th>
+        <th>Resume</th>
+    </tr>
+
+    {% for applicant in applicants %}
+    <tr>
+        <td>{{ applicant.name }}</td>
+        <td>{{ applicant.email }}</td>
+        <td>{{ applicant.phone }}</td>
+        <td>{{ applicant.role|default:"-" }}</td>
+        <td>{{ applicant.status }}</td>
+        <td>{{ applicant.candidate_response|default:"-" }}</td>
+        <td>
+            {% if applicant.resume %}
+                <a href="{{ applicant.resume.url }}" target="_blank">View</a>
+            {% else %}
+                No file
+            {% endif %}
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="7">No applicants found</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<a href="/applicants/apply/" class="button">Apply Now</a>
+
+</body>
+</html>
