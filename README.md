@@ -1,42 +1,20 @@
-# \# AchatK Assignment - Python Intern
+### 📊 Data Architecture
+The project utilizes a structured MySQL relational database to manage complex applicant data. I designed the schema to ensure data integrity and referential transparency, allowing for efficient querying of applicant profiles, test scores, and status logs. This architecture supports high-volume data ingestion while maintaining a "Single Source of Truth" for all user records.
 
+### ✅ Data Validation (QA Engineering)
+To ensure high data quality, I implemented a robust Validation Layer using Python and Django's internal logic.
 
+Schema Enforcement: Prevents "messy" or incomplete data from entering the REST API.
 
-\## Day 1
+De-duplication: Automated checks to ensure unique identifiers for every applicant.
 
-\- Django project setup
+Error Handling: Custom exception handling to flag and log invalid data inputs during the ingestion phase.
 
-\- MySQL database configured
+### ⚙️ ETL Pipeline (Extract, Transform, Load)
+This project functions as a streamlined ETL pipeline:
 
-\- Applicant model created
+Extract: Data is captured via RESTful API endpoints.
 
+Transform: Raw inputs are processed and normalized using Django's business logic to ensure consistent formatting.
 
-
-\## Day 2
-
-\- CRUD operations implemented
-
-\- API endpoint created using Django REST Framework
-
-
-
-\## Features
-
-\- Add applicant (form)
-
-\- View applicants (UI)
-
-\- Fetch applicants (API - JSON)
-
-
-
-\## Run Project
-
-python manage.py runserver
-
-
-
-\## API
-
-http://127.0.0.1:8000/applicants/api/applicants/
-
+Load: Validated data is securely loaded into the MySQL database for persistence and future analytical use.
